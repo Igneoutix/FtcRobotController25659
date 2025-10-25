@@ -29,11 +29,13 @@ public class LordOfTheCookies extends OpMode {
     private static final boolean USE_WEBCAM = true;
     private VisionPortal visionPortal;
     private AprilTagProcessor aprilTag;
+    AprilTagDetection myAprilTagDetection;
 
     @Override
     public void init() {
 
         buildAprilTag();
+
 
         FL = hardwareMap.dcMotor.get("FL");
         BL = hardwareMap.dcMotor.get("BL");
@@ -48,6 +50,16 @@ public class LordOfTheCookies extends OpMode {
 
     @Override
     public void loop() {
+
+        double myX = myAprilTagDetection.ftcPose.x;
+        double myY = myAprilTagDetection.ftcPose.y;
+        double myZ = myAprilTagDetection.ftcPose.z;
+        double myPitch = myAprilTagDetection.ftcPose.pitch;
+        double myRoll = myAprilTagDetection.ftcPose.roll;
+        double myYaw = myAprilTagDetection.ftcPose.yaw;
+
+        telemetry.addData("XDistance", myX);
+        telemetry.addData("YDistance", myY);
 
         telemetryAprilTag();
 
